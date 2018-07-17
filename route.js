@@ -80,7 +80,6 @@ module.exports = router => {
         console.log(URL);
         var usertype = req.body.usertype;
         console.log(usertype);
-
         const sndKey = req.body.sndKey;
         console.log(sndKey);
         // var password = req.body.sndKey;
@@ -396,7 +395,6 @@ module.exports = router => {
 
 
                 })
-
             // Downloading files from IPFS
                 ipfs.files.cat(result.message[1], function(err, data) {
                     if (err) throw err;
@@ -429,41 +427,11 @@ module.exports = router => {
 
     })
     // })
-
-
-
-
-    
-
-
-    router.post('/registerUser', cors(), (req, res) => {
-        console.log("UI", req.body);
-
-        const companyname = req.body.companyname;
-        console.log(companyname);
-        const firstname = req.body.fname;
-        console.log(firstname);
-        const lastname = req.body.lname;
-        console.log(lastname);
-        const email = req.body.email;
-        console.log(email);
-        const password = req.body.pass;
-     
-
-        console.log(password);
-        const pwd = crypto
             .createHash('sha256')
             .update(password)
             .digest('base64');
-        console.log("pwd", pwd); //encryption
-        const retypepassword = req.body.repass;
-        console.log(retypepassword);
-       
-        const rpwd = crypto
-            .createHash('sha256')
-            .update(password)
-            .digest('base64');
-        console.log("pwd", rpwd); //encryption
+            console.log("pwd",rpwd);//encryption
+
 
         const usertype = req.body.usertype;
         console.log("harini123..<<<", usertype);
@@ -544,7 +512,6 @@ module.exports = router => {
                                     .json({
                                         message: result.message,
                                         phonenumber: phonenumber,
-
                                     });
 
                             })
@@ -559,7 +526,7 @@ module.exports = router => {
 
 
         }
-    });
+    
 
     router.post('/mail', cors(), (req, res) => {
 
