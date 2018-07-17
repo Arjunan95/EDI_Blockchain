@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+       
+        <!------ Include the above in your HEAD tag ---------->
+        
+       
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
+                <!-- Website CSS style -->
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+        
+                <!-- Website Font style -->
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+                <link rel="stylesheet" href="style.css">
+                <!-- Google Fonts -->
+                <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+                <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+                <link rel="import" href="https://www.npmjs.com/package/sweetalert">
+</head>
+  
+ 
+ 
+  <!-- <script type="text/javascript"> </script>
+<script>
+ function config() {
+     console.log("end of the fn");
+    script.src="../bundle.js";
+}
+</script> -->
+<script type='text/javascript'>
+    
+    function login() {
+  
+    var typeuser;
+    
+        var email = document.getElementById("email").value;
+        console.log("lol----"+email)
+        var password = document.getElementById("password").value;
+        console.log("lol----"+password)
+  
+        var logreg = {
+  
+        "email" : email,
+        "password" : password, 
+      
+        }
+    
+     $.ajax({
+  
+         url: 'http://localhost:8082/login' ,
+            type: 'POST',
+            contentType: 'application/json',
+              data: JSON.stringify(logreg),
+              success: function(response) {
+              console.log((response));
+            var typeuser = response.usertype;
+            console.log(typeuser)
+            // typeuser = document.getElementById("usertype").innerHTML = usertype 
+            localStorage.setItem("image1",typeuser);
+            
+            var email = response.result.users.email;
+            console.log("email",email);
+            localStorage.setItem("image2",email);
+            var firstname= response.result.users.firstname;
+            console.log("firstname",firstname);
+            localStorage.setItem("image3",firstname);
+            var lastname= response.result.users.lastname
+            console.log("lastname",lastname);
+            localStorage.setItem("image4",lastname);   
+            
+   
+            var usertype= response.result.users.usertype
+            console.log("usertype",usertype);
+            localStorage.setItem("usertype",usertype); 
+            var accountaddress= response.result.users.accountaddress
+            console.log("accountaddress",accountaddress);
+            localStorage.setItem("accountaddress",accountaddress); 
+            
+      var url = document.getElementById("email").innerHTML = email
+     console.log("url",url);
+            var queryString = "?para1=" +email;
+         
+        if(typeuser == "Manufacturer")
+        {
+         window.location = "properties.html";
+        } else if ((typeuser == "Vendor")&&(status == "delivered"))
+        {
+          window.location = "inbox.html";
+        
+        }
+        else if ((typeuser == "Manufacturer")&&(status == "delivered"))
+        {
+          window.location = "deliverystatus.html";
+        
+        }
+        
+        else
+        {
+            window.location = "keygeneration.html";
+        }
+       alert("login sucessful");
+      
+            },
+         
+             
+             
+        }); 
+      
+        
+    }
+  
+    </script>
+<nav class="navbar navbar-inverse">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+    
+        </div>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+        
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="register.html">Register</a></li>
+                  <li><a href="login.html">Login</a></li>
+              </ul>
+        </div>
+    </nav>
+<body>
+    <!-- <body  background="image/Webpage-Background.png"> -->
+        <body>
+            <br>
+            <h3 style="margin-left:1050px">  Login  </h3>
+            <br>
+            <br>
+
+            <div class="container">
+                <div class="row main">
+                    <br> <br>
+                    <div class="main-login main-center">
+                        <br>
+                        <br>
+                        <form class="" method="post" action="#">
+                            
+                            <div class="form-group">
+                                <label for="email" class="cols-sm-2 control-label"> Email</label>
+                                <div class="cols-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+                                    </div>
+                                </div>
+                            </div> <br>
+    
+                            
+    
+                            <div class="form-group">
+                                <label for="password" class="cols-sm-2 control-label">Password</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+                                    </div>
+                                </div>
+                            </div>
+    <br>
+    <br>
+                            <div class="form-group ">
+                                    <button type="button"  onclick="login()" class="btn btn-primary btn-lg btn-block login-button">Login </button> <br> <br>
+                                   
+                                    <label>
+                                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                                          </label>
+                                          <span class="psw">Forgot <a href="#">password?</a></span>
+                                    </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+<style>
+        #playground-container {
+        height: 500px;
+        overflow: hidden !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    body, html{
+        background:url(https://www.softwebmobility.com/wp-content/uploads/2016/02/mdm-banner.jpg?id=7010);
+         height: 100%;
+         
+         /* background:white; */
+         font-family: 'Oxygen', sans-serif;
+            background-size: cover;
+    }
+    
+    /* .main{
+         margin-top: 5px;
+    } */
+    
+    h1.title { 
+        font-size: 50px;
+        font-family: 'Passion One', cursive; 
+        font-weight: 400; 
+    }
+    
+    hr{
+        width: 10%;
+        color: #fff;
+    }
+    
+    .form-group{
+        margin-bottom: 15px;
+    }
+    
+    label{
+        margin-bottom: 15px;
+    }
+    
+    input,
+    input::-webkit-input-placeholder {
+        font-size: 11px;
+        padding-top: 3px;
+    }
+    
+    .main-login{
+         /* background-color: #fff; */
+        /* shadows and rounded borders */
+        
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    
+    }
+    .form-control {
+        height: auto!important;
+    padding: 8px 12px !important;
+    }
+    .input-group {
+        -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+        -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+        box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+    }
+    #button {
+        border: 1px solid #ccc;
+        margin-top: 28px;
+        padding: 6px 12px;
+        color: #666;
+        text-shadow: 0 1px #fff;
+        cursor: pointer;
+        -moz-border-radius: 3px 3px;
+        -webkit-border-radius: 3px 3px;
+        border-radius: 3px 3px;
+        -moz-box-shadow: 0 1px #fff inset, 0 1px #ddd;
+        -webkit-box-shadow: 0 1px #fff inset, 0 1px #ddd;
+        box-shadow: 0 1px #fff inset, 0 1px #ddd;
+        background: #f5f5f5;
+        background: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f5f5f5), color-stop(100%, #eeeeee));
+        background: -webkit-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+        background: -o-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+        background: -ms-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+        background: linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#eeeeee', GradientType=0);
+    }
+    .main-center{
+        
+        margin: 0 auto;
+        margin-left: 720px;
+        margin-top: -64px;
+        max-width: 650px;
+        height: 450px;
+        padding: 10px 40px;
+        background: darkgray;
+        color: black;
+        text-shadow: none;
+        -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+        -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+        box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+    }
+    
+    
+    
+    
+    span.input-group-addon i {
+        color: #009edf;
+        font-size: 17px;
+    }
+    
+    .login-button{
+        margin-top: 5px;
+    }
+    
+    .login-register{
+        font-size: 11px;
+        text-align: center;
+    }
+    a {
+    color: black;
+    text-decoration: none;
+}
+.btn-primary {
+    color: black;
+    background-color: gray;
+    border-color: gray;
+}
+    </style>

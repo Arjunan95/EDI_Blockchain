@@ -1,0 +1,421 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+		<!-- Website CSS style -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<link rel="stylesheet" href="style.css">
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
+        
+        <script type='text/javascript'>
+            function handler() {
+                var companyname = document.getElementById("companyname").value;
+                console.log("address...>>>" +companyname);
+                // var publickey = "03e74203cd5d55228f7e6690d1f179c5e139eae8daef5ed3ff21cefd7a3028e90e";
+                // var privatekey = document.getElementById("privatekey").value;
+                // console.log("address...>>>" +privatekey);
+             var fname = document.getElementById("fname").value;
+                console.log("address...>>>" +fname);
+        //         var url = document.getElementById("url").value;
+        //         console.log("Coinreciever:------>" +url);
+
+        // //         $(document).ready(function () {
+        // //    $("#button").click(function () {
+
+        // //        var name = $("#fname").val();
+        // //        localStorage.setItem("fname",fname);
+               
+        //        console.log("Coinreciever:------>",url);
+    //            if (url==Manufacturer)
+    //             {
+    //                 window.location = "properties.html";
+    //                 window.location = "inbox.html";
+
+    //             }
+    //             else(url==Vendor);
+    //             {
+    //                 window.location = "keygeneration.html";
+    //                window.location = "deliverystatus.html";
+    //             }
+              
+              
+              
+    //        });
+    //    });
+                var lname =document.getElementById("lastname").value;
+
+                console.log("address...>>>" +lname);
+
+    //             $(document).ready(function () {
+    //        $("#button").click(function () {
+    //            var name = $("#lastname").val();
+    //            localStorage.setItem("lname",lname);
+    //            window.location = "properties.html";
+
+    //        });
+    //    });
+                var phonenumber =(document.getElementById("phonenumber").value);
+                console.log("lolphone123----"+phonenumber)
+                var email = document.getElementById("email").value;
+                console.log("lol----"+email)
+                var pass = document.getElementById("pass").value;
+                console.log("lol----"+pass)
+                var repass =(document.getElementById("repass").value);
+                console.log("lol----"+repass)
+                var usertype = document.getElementById("usertype").value;
+                console.log("Coinreciever:------>" + usertype);
+                // var url = document.getElementById("url").value;
+                // console.log("Coinreciever:------>" +url);
+                var accountaddress = document.getElementById("accountaddress").value;
+                console.log("Coinreciever:------>" +accountaddress);
+
+                var register = {
+                "companyname":companyname,
+                // "privatekey": privatekey,
+                "fname" : fname, 
+                "lname" : lname, 
+                "phonenumber":phonenumber,
+                "email" : email,
+                "pass" : pass, 
+                "repass" : repass,
+                "usertype" : usertype,
+                // "url":url,
+                "accountaddress":accountaddress
+                
+
+                }
+                
+             $.ajax({
+                 url: 'http://localhost:8082/registerUser' ,
+                    type: 'POST',
+                    dataType: 'application/json',
+                    jsonp: 'application/json',
+                    success: function (data) {
+                        console.log('success', data);
+                       
+                    },
+                    data: register,
+            
+                   
+                    
+                });
+              alert("Verify otp");
+                window.location = "otp.html";
+                       
+            }
+            </script>
+        
+    </head>
+    <nav class="navbar navbar-inverse">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+        
+            </div>
+            <!-- Collection of nav links, forms, and other content for toggling -->
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a href="register.html">Register</a></li>
+                      <li><a href="login.html">Login</a></li>
+                  </ul>
+            </div>
+        </nav>
+	<body>
+            <!-- <div id= "header">
+                    <h3> <center>Registration </center> </h3> <br> <br>
+               </div> -->
+               <h3 style="margin-left:700px;"><font color="black"><center>Registration </font></center>  </h3> <br> 
+			<div  class="row main">
+				<div class="main-login main-center"> <br>
+			 <div class="form-row">
+                <form class="" method="post" action="#">
+                                                        <label for="name" class="col-sm-6">Company Name</label>
+                                                        <div class="col-sm-6"style="margin-bottom:13px">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                                    <input type="text" class="form-control" name="name" id="companyname"  placeholder="Enter your company name"/>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                           
+                                <div class="form-row">
+                                    <label for="name" class="cols-sm-2 control-label">Company ID</label>
+                                    <div class="col-sm-6"style="margin-bottom:13px">
+                                            <!-- <div class="input-group">
+                                               
+                                                <select id="usertype">
+                                                        <option >Select Value</option>
+                                                    <option id="usertype">Honda</option>
+                                                    <option id="usertype">Account 1</option>
+                                                    <option id="usertype">Account 2</option>
+                                                    <option id="usertype">Account 3</option>
+                                                    <option id="usertype">Account 4</option>
+                                                    <option id="usertype">Account 5</option>
+                                                    </select>
+                                            </div> -->
+                                            <input type="text" class="form-control" name="name" id="usertype"  placeholder="Enter your company Id"/>
+
+
+                                        </div>
+                                        </div>
+                                    </form>
+                                        <br>
+                                      
+                                        <div class="form-row">
+                                            	<form class="" method="post" action="#">
+                                                <label for="name" class="col-sm-6">FirstName</label>
+                                                <div class="col-sm-6" style="margin-bottom:13px">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                            <input type="text" class="form-control" name="name" id="fname"  placeholder="Enter your Name"/>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                
+                                                    
+						<div class="form-row">
+                            <label for="name" class="cols-sm-2 control-label">Last Name</label>
+                            <div class="col-sm-6"style="margin-bottom:13px">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="name" id="lastname"  placeholder="Enter your Name"/>
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
+                                
+    
+                            <div class="form-row">
+                                    <form class="" method="post" action="#">
+                                    <label for="name" class="col-sm-6">Email Id</label>
+                                    <div class="col-sm-6"style="margin-bottom:13px">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="name" id="email"  placeholder="Enter your Email"/>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <br>
+            <div class="form-row">
+                <label for="name" class="cols-sm-2 control-label">Mobile Number</label>
+                <div class="col-sm-6"style="margin-bottom:13px">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="name" id="phonenumber"  placeholder="Enter your Number"/>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <br>
+                <div class="form-row">
+                        <form class="" method="post" action="#">
+                        <label for="name" class="col-sm-6">Password</label>
+                        <div class="col-sm-6"style="margin-bottom:13px">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="name" id="pass"  placeholder="Enter your password"/>
+                                </div>
+                            </div>
+                            </div>
+                            <br>
+<div class="form-row">
+    <label for="name" class="cols-sm-2 control-label">Confirm Password</label>
+    <div class="col-sm-6"style="margin-bottom:13px">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" name="name" id="repass"  placeholder="Enter your password"/>
+            </div>
+        </div>
+        </div>
+    <br>
+    <div class="form-row">
+            <form class="" method="post" action="#">
+            <label for="name" class="col-sm-6">Account Address</label>
+            <div class="col-sm-6"style="margin-bottom:13px">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock fa-key" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" name="name" id="accountaddress"  placeholder="Enter your account address"/>
+                </div>
+                </div>
+                </div>
+                <br>
+
+                <!-- <div class="form-row">
+                    <label for="name" class="cols-sm-2 control-label">Account Address</label>
+                    <div class="col-sm-6"style="margin-bottom:13px">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-key" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="name" id="accountaddress"  placeholder="Enter your account address"/>
+                            </div>
+                        </div>
+                        </div> -->
+                <br>
+
+
+               <br>      
+                        
+						<div class="form-group " style="margin-top:40px">
+                                <button type="button" id="button" onclick="handler()" class="btn btn-primary btn-lg btn-block login-button">Submit </button>
+						</div>
+						 
+				</div>
+			</div>
+
+		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
+
+<style>
+    #playground-container {
+    height: 500px;
+    overflow: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
+body, html{
+     height: 100%;
+ 	background-repeat: no-repeat;
+ 	background:url(http://www.mtboss.com/images/hero-header/login.jpg);
+ 	font-family: 'Oxygen', sans-serif;
+	    background-size: cover;
+}
+
+/* .main{
+ 	margin-top: 5px;
+} */
+
+h1.title { 
+	font-size: 50px;
+	font-family: 'Passion One', cursive; 
+	font-weight: 400; 
+}
+
+hr{
+	width: 10%;
+	color: #fff;
+}
+
+.form-group{
+	margin-bottom: 15px;
+}
+
+label{
+	margin-bottom: 12px;
+    margin-left: 9px
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+.main-login{
+ 	background-color: #fff;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+}
+.form-control {
+    height: auto!important;
+padding: 8px 12px !important;
+}
+.input-group {
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+}
+#button {
+    border: 1px solid #ccc;
+    margin-top: 28px;
+    padding: 6px 12px;
+    color: #666;
+    text-shadow: 0 1px #fff;
+    cursor: pointer;
+    -moz-border-radius: 3px 3px;
+    -webkit-border-radius: 3px 3px;
+    border-radius: 3px 3px;
+    -moz-box-shadow: 0 1px #fff inset, 0 1px #ddd;
+    -webkit-box-shadow: 0 1px #fff inset, 0 1px #ddd;
+    box-shadow: 0 1px #fff inset, 0 1px #ddd;
+    background: #f5f5f5;
+    background: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f5f5f5), color-stop(100%, #eeeeee));
+    background: -webkit-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+    background: -o-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+    background: -ms-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+    background: linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#eeeeee', GradientType=0);
+}
+.main-center{
+    margin-top:-20px;
+    margin-left:745px;
+    max-width: 650px;
+    height: 550px;
+    padding: 10px 40px;
+    background: rgba(0, 0, 0, 0.42);
+    color: #FFF;
+    text-shadow: none;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+}
+
+
+
+
+span.input-group-addon i {
+    color: #009edf;
+    font-size: 17px;
+}
+
+.login-button{
+	margin-top: 5px;
+}
+
+.login-register{
+	font-size: 11px;
+	text-align: center;
+}
+select, textarea {
+    margin: 0;
+    font: inherit;
+    color: black;
+    height:40px;
+    width:250px;
+}
+
+</style>
