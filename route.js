@@ -9,7 +9,7 @@ var multipartMiddleware = multipart();
 var path = require('path');
 var jsdom = require("jsdom");
 var http = require('http');
-var n=0;
+var n = 0;
 var count = 0
 $ = require('jquery')(new jsdom.JSDOM().window);
 const Nexmo = require('nexmo');
@@ -58,11 +58,8 @@ var ipfs = ipfsAPI('localhost', 5001)
 var crypto = require('crypto'),
     algorithm = 'aes-256-ctr',
     password = 'd6F3Efeq';
-  
-    const EthereumEncryption = require('ethereum-encryption');
 
-
-
+const EthereumEncryption = require('ethereum-encryption');
 
 
 
@@ -83,7 +80,7 @@ module.exports = router => {
         console.log(URL);
         var usertype = req.body.usertype;
         console.log(usertype);
-    
+
         const sndKey = req.body.sndKey;
         console.log(sndKey);
         // var password = req.body.sndKey;
@@ -91,47 +88,41 @@ module.exports = router => {
         console.log(Key);
         const publicKey = req.body.publickey;
         console.log(publicKey);
-        // const privateKey = req.body.privatekey;
-        // console.log(privateKey);
+    
         const status = req.body.status;
         console.log(status);
         var url = req.body.path;
-        console.log("path",url);
-         count = count+1;
+        console.log("path", url);
+        count = count + 1;
         console.log(count);
-        
+
         var demo = {
             URL: URL,
             usertype: usertype,
             sndKey: sndKey,
             Key: Key,
-            publicKey:publicKey,
-            status:status,
-           
+            publicKey: publicKey,
+            status: status,
+
         }
         outbox
-        .outboxUser(URL,usertype,sndKey,Key,publicKey,status) 
-        .then(result => {
-            //  console.log("outboxresult",result)
-            var status="delivered"
-            console.log("status",status)
-           getupdate.getupdate(usertype,url,status,count)
+            .outboxUser(URL, usertype, sndKey, Key, publicKey, status)
             .then(result => {
-            //    console.log("outboxresult",result)
-            })
-                                                                       
+                //  console.log("outboxresult",result)
+                var status = "delivered"
+                console.log("status", status)
+                getupdate.getupdate(usertype, url, status, count)
+                    .then(result => {
+                        //    console.log("outboxresult",result)
                     })
 
+            })
 
-        //  obj.jsonFileData.push({id: 1, square:2});
 
-        //  var json = JSON.stringify(obj);
+       
 
         var fs = require('fs');
-        //  fs.writeFile('myjsonfile.json', json, (err) => {  
-        //     if (err) throw err;
-        //     console.log('Data written to file');
-        // });
+    
 
         fs.readFile('file.json', 'utf8', function readFileCallback(err, data) {
             if (err) {
@@ -146,157 +137,103 @@ module.exports = router => {
                 fs.writeFile('file.json', json, 'utf8', (err) => {
                     if (err) throw err;
                     console.log('Data written to file');
+                    var testObj = JSON.parse(fs.readFileSync('file.json', 'utf8'));
+                    console.log("testObj=====================>", testObj);
+                    var arr = obj;
+                    console.log(arr.jsonFileData);
+                    var json = arr.jsonFileData;
+                    console.log("jsonlength123?????????>>>>>", json.length);
+                    var i, counter = 0;
+                    for (i = 0; i <= json.length - 1; i++) {
+                        var message = json[i];
+                        // console.log("1234",message)
+                    }
 
-                
-        // var testObj = JSON.parse(fs.readFileSync('file.json', 'utf8'));
-        // console.log("testObj=====================>", testObj);
-        // var arr = obj;
-        // console.log(arr.jsonFileData);
-        // var json = arr.jsonFileData;
-        // console.log("jsonlength123?????????>>>>>", json.length);
-        // var i,counter=0;
-        // for(i=0;i<=json.length-1; i++){
-        //  var message = json[i];
-        //  console.log("1234",message)
-        var testObj = JSON.parse(fs.readFileSync('file.json', 'utf8'));
-        console.log("testObj=====================>", testObj);
-        var arr = obj;
-        console.log(arr.jsonFileData);
-        var json = arr.jsonFileData;
-        console.log("jsonlength123?????????>>>>>", json.length);
-        var i,counter=0;
-        for(i=0;i<=json.length-1; i++){
-            var message = json[i];
-            // console.log("1234",message)
-           }
-               
-         var cron = require('node-cron');
+                    var cron = require('node-cron');
 
-         cron.schedule('*/1 * * * *', function() {
+                    cron.schedule('*/1 * * * *', function() {
 
-            //do some work
- var sndKey = message.sndKey;
- console.log(sndKey)
- var publicKey = message.publicKey;
- console.log(publicKey)
-        // console.log("arjun")
-            fs.readdir(message.URL, (err, data) => {
+                        //do some work
+                        var sndKey = message.sndKey;
+                        console.log(sndKey)
+                        var publicKey = message.publicKey;
+                        console.log(publicKey)
+                        // console.log("arjun")
+                        fs.readdir(message.URL, (err, data) => {
 
-                data.forEach(data => {
-                    if (data)
-                        // console.log("data", data);
-                    var file = data;
+                            data.forEach(data => {
+                                if (data)
+                                    // console.log("data", data);
+                                    var file = data;
 
-                    fs.readFile(message.URL+"/"+file,function(err,data){
+                                fs.readFile(message.URL + "/" + file, function(err, data) {
 
-                        var data = data.toString('base64');
-                    // console.log("received data:" + data);
-                    console.log(message.URL+ "/" + file)
-                    console.log("manoj")
-               
-                    // const privateKey = '8d7e743ea5c37a7df4b527178f4e1a674b5882cb2cacad3c02ae9b13c097acfe';
-                    // console.log("privatekey",privateKey)
-                    const publicKey = message.publicKey;
-                    console.log("publickey",publicKey);
-                    // const address = EthereumEncryption.publicKeyToAddress(publicKey);
-                    // console.log("address",address)
-                    // const hash = EthereumEncryption.hash(json.URL + "/" + file);
-                    // console.log("hash",hash)
-                    // const signature = EthereumEncryption.signHash(privateKey,hash);
-                    // console.log("signature",signature);
-                    // const valid = EthereumEncryption.verifyHashSignature(publicKey,hash,signature);
-                    //    console.log("valid",valid);
-                    const encrypted = EthereumEncryption.encryptWithPublicKey(publicKey,data);
-                    // console.log("encrypted",encrypted)
-                        // '03a34d6aef3eb42335fb3cacb59478c0b44c0bbeb8bb4ca427dbc7044157a5d24b', // publicKey
-                        // 'foobar' // data
-                       
-// var base64data = new Buffer(encrypted);  
-// var crypted = base64data.toString('base64');
-                  var crypted = Buffer(encrypted);
-                //  console.log("crypted",crypted)
-                //  var crypt = crypted.toString('base64')
-                    
-                    // fs.readFile("/home/rpqb-desk-003/vendor_files/" + crypted, function(err, data) {
-                    //     var file1 = data;
-                    //     console.log(file1)
-                        ipfs.files.add(crypted, (err, result) => { // Upload buffer to IPFS
-                            if (err) {
-                                console.error(err)
-                                return
-                            }
-                            let url = `${result[0].hash}`
-                            //https://ipfs.io/ipfs/
-                            console.log("url", url)
-                        
-                            var name = url;
-                            console.log(file)
-                        
-                            fs.unlink(message.URL + "/" + file, (err) => {
-                                if (err) throw err;
-                                console.log('successfully deleted /tmp/hello');
-                            });
-                        
-                            console.log(file)
-                            // if (!URL ||!sndKey || !url ||!usertype ||!Key ) {
-                            // res
-                            //     .status(400)
-                            //     .json({
-                            //         message: 'Invalid Request !'
-                            //     });
-                            // }
-                            //     else {
+                                    var data = data.toString('base64');
+                                    console.log(message.URL + "/" + file)
+                                    console.log("manoj")
+                                    //Encrypting the file
+                                    const publicKey = message.publicKey;
+                                    console.log("publickey", publicKey);
+                                  
+                                    const encrypted = EthereumEncryption.encryptWithPublicKey(publicKey, data);
+                                  
+                                    var crypted = Buffer(encrypted);
+                                   //encrypted file sending into IPFS
+                                    ipfs.files.add(crypted, (err, result) => { // Upload buffer to IPFS
+                                        if (err) {
+                                            console.error(err)
+                                            return
+                                        }
+                                        let url = `${result[0].hash}`
+                                        //https://ipfs.io/ipfs/
+                                        console.log("url", url)
 
+                                        var name = url;
+                                        console.log(file)
 
-                                //enter in to the ethereum
-                        
-                                    filereader
-                                        .filereader(URL,sndKey,url,usertype,publicKey)
-                                        .then(result => {
-            
-                                            
-                            
-                                            res.send({
-                                                "message": "Transaction Complete",
-                                                "status": true,
-                            
-                                             
-                            
-                                            })
+                                        fs.unlink(message.URL + "/" + file, (err) => {
+                                            if (err) throw err;
+                                            console.log('successfully deleted /tmp/hello');
+                                        });
+
+                                        console.log(file)
                                    
+
+
+                                        //entering into the web3.js
+
+                                        filereader
+                                            .filereader(URL, sndKey, url, usertype, publicKey)
+                                            .then(result => {
+
+
+
+                                                res.send({
+                                                    "message": "Transaction Complete",
+                                                    "status": true,
+
+
+
+                                                })
+
+                                            })
+
+
+
+
                                     })
-                                
-                                    
+                                })
 
-
-                         
-
-                                // var _to = sndKey;
-                                // console.log("sndkey123",_to);
-                                // var _text = url;
-                                // console.log(_text);
-                                // // console.log(web3js.eth.accounts[0])
-
-                                // Coursetro.sendMessage(_to, _text, {
-                                //     from: web3.eth.accounts[0],
-                                //     gas: 4779961,
-                                // })
-                                // // Coursetro.createAuction($("#name").val(), $("#age").val());
-                                // console.log("transaction successful")
-                            
-                         })
+                            })
                         })
-                    
+
                     })
+
                 })
-            
-            })
-        
-        })
-     
-// });  
-}
-});
+
+                // });  
+            }
+        });
 
 
 
@@ -320,61 +257,61 @@ module.exports = router => {
 
     //  console.log('running a task every two minutes');
     // });
-    
+
     router.post('/keygenerator', cors(), (req, res) => {
-        
+
         // var url = req.body.url;
         // console.log("url",url);
         var usertype = req.body.usertype;
-        console.log("url",usertype);
-        var  privatekey = req.body.privatekey;
+        console.log("url", usertype);
+        var privatekey = req.body.privatekey;
         console.log(privatekey);
-        const  publickey = EthereumEncryption.publicKeyFromPrivateKey(
+        const publickey = EthereumEncryption.publicKeyFromPrivateKey(
             privatekey
         );
-        console.log( publickey);
+        console.log(publickey);
         keygeneration
-        .keygeneration(usertype,privatekey,publickey)
-        .then(result => {
-            console.log("resultharini",result);
+            .keygeneration(usertype, privatekey, publickey)
+            .then(result => {
+                console.log("resultharini", result);
 
-            res.send({
-                "message": " Stored Successful",
-                "result":result.usr
-            });
-        })
-        .catch(err => res.status(err.status).json({
-            message: err.message
-        }).json({
-            status: err.status
-        }));
+                res.send({
+                    "message": " Stored Successful",
+                    "result": result.usr
+                });
+            })
+            .catch(err => res.status(err.status).json({
+                message: err.message
+            }).json({
+                status: err.status
+            }));
 
-});
+    });
 
     router.post('/fetchallkey', cors(), (req, res) => {
-    
+
         var usertype = req.body.usertype;
-        console.log("url",usertype);
-        
-      
-       getallkey
-        .getallkey(usertype)
-        .then(result => {
-            console.log("resultharini", result);
-    
-            res.send({
-                "message": " Stored Successful",
-                "result":result.usr
-            });
-        })
-        .catch(err => res.status(err.status).json({
-            message: err.message
-        }).json({
-            status: err.status
-        }));
-    
+        console.log("url", usertype);
+
+
+        getallkey
+            .getallkey(usertype)
+            .then(result => {
+                console.log("resultharini", result);
+
+                res.send({
+                    "message": " Stored Successful",
+                    "result": result.usr
+                });
+            })
+            .catch(err => res.status(err.status).json({
+                message: err.message
+            }).json({
+                status: err.status
+            }));
+
     });
-        
+
     router.post('/getAck', cors(), (req, res) => {
         var key = req.body.Key;
         console.log(key);
@@ -414,44 +351,41 @@ module.exports = router => {
 
 
     router.post('/getStatus', cors(), (req, res) => {
-        // var cron = require('node-cron');
 
-        // cron.schedule('*/1 * * * *', function() {
-      
-            var self = this;
-            var sndKey = req.body.sndKey;
-            console.log(sndKey)
-            var privateKey = req.body.privateKey;
-            console.log(privateKey)
-          
-            // var num = req.body.IndexNumber;
-            // console.log(num);
-            var status = req.body.status;
-            console.log("status", status);
-            n=n+1;
-            console.log("nvalue",n);
-                 var IndexNumber = "";
-                console.log(IndexNumber);
-    
-                for(var i =0;i<=n;i++)
-                IndexNumber=i;
-                console.log("numvalue123",n)
-                console.log("Indexnumber",IndexNumber) 
-        
-               
-            fetchkey
-            .fetchkey(sndKey,status,IndexNumber)
-                .then(function(result) {
-                    console.log(result)
-    
-                    res.send({
-                        status: result.status,
-                        message: result.usr
-                    });
-                })            
-           
+
+        var self = this;
+        var sndKey = req.body.sndKey;
+        console.log(sndKey)
+        var privateKey = req.body.privateKey;
+        console.log(privateKey)
+
+        var status = req.body.status;
+        console.log("status", status);
+        n = n + 1;
+        console.log("nvalue", n);
+        var IndexNumber = "";
+        console.log(IndexNumber);
+
+        for (var i = 0; i <= n; i++)
+            IndexNumber = i;
+        console.log("numvalue123", n)
+        console.log("Indexnumber", IndexNumber)
+
+
+        fetchkey
+            .fetchkey(sndKey, status, IndexNumber)
+            .then(function(result) {
+                console.log(result)
+
+                res.send({
+                    status: result.status,
+                    message: result.usr
+                });
+            })
+            // Entering into web3.js
+
         getStatus
-        .getStatus(sndKey,privateKey,IndexNumber)
+            .getStatus(sndKey, privateKey, IndexNumber)
             .then(function(result) {
                 console.log(result)
 
@@ -462,109 +396,47 @@ module.exports = router => {
 
 
                 })
-            
-            
+
+            // Downloading files from IPFS
+                ipfs.files.cat(result.message[1], function(err, data) {
+                    if (err) throw err;
+            // Decrypting the file
+                    var encryptedfile = data.toString();
+                    const message = EthereumEncryption.decryptWithPrivateKey(
+                        privateKey, encryptedfile // privateKey
+                        // encrypted-data
+                    );
+                    // console.log("message",message)
 
 
-           
-                // const validCID = result.message[1];
-                // var url = "/home/rpqb-desk-003/vendor_files"
-                // var file = fs.writeFile(url+"/"+validCID);
-// var request = http.get("http://ipfs.io/ipfs/${result[1].hash}", function(response) {
-//   response.pipe(file);
-//   console.log(request)
-// });
-ipfs.files.cat(result.message[1], function (err, data) {
-if(err) throw err;
-// console.log("manoj",data);
-// console.log(data.toString('base64'))
+                // writing a file into a specified location
 
-
-// const validCID = result[1]
-// console.log("manoj",validCID)
-// ipfs.files.get(validCID, function (err, files) {
-//   files.forEach((file) => {
-//     console.log("file",file)
-//     console.log(file.content.toString('utf8'))
-//   })
-// })
-var encryptedfile = data.toString();
-const message = EthereumEncryption.decryptWithPrivateKey(
-privateKey,encryptedfile// privateKey
-// encrypted-data
-);
-// console.log("message",message)
-
-
-                       
-            
-                        var URL = "/home/rpqb-desk-003/Aidant_received"
-                        const file = result.message[1];
-//                         var base64Data =  'data:image/png;base64'+"/"+file.content.toString('base64') ;
-// console.log("manoj",base64Data)
-                    //   fs.writeFile(URL+"/"+file,message.toString('base64') ,'base64', function(err) {
-                    //      console.log(err);
-                    //     });
-                            console.log("Enter in to the received ")
-                    fs.writeFile(URL+"/"+file, message,'base64' ,(err) => {
+                    var URL = "/home/rpqb-desk-003/Aidant_received"
+                    const file = result.message[1];
+                 
+                    console.log("Enter in to the received ")
+                    fs.writeFile(URL + "/" + file, message, 'base64', (err) => {
                         if (err) throw err;
                         console.log('Data written to file');
-    
+
                     }); // write it back 
-              
- // write it back 
-                    })
 
-  
+                    // write it back 
                 })
 
-                })
-           // })
- 
-            
-        
 
+            })
 
-    
-        
-
-  
-
-
-    
-
-
-    // function(error, result){
-    // Coursetro.getMessageByIndex(_who,_index,)
-    //         // Coursetro.createAuction($("#name").val(), $("#age").val());
-    //         console.log(result)
-    //         console.log("transaction successful")
+    })
     // })
 
 
 
 
-    //                      var privkeyAlice = ursa.createPrivateKey(fs.readFileSync('/home/rpqb-desk-003/alice/privkey.pem'));
-    //                      var pubkeyBob = ursa.createPublicKey(fs.readFileSync('/home/rpqb-desk-003/bob/pubkey.pem'));
-    //  var sig = privkeyBob.hashAndSign('sha256', url, 'utf8', 'base64');
-    //   console.log('signed', sig, '\n');
-
-    // var url = "/home/rpqb-desk-003/decrypted_files"
-    //    fs.readFile("image.jpg",function(err,img){
-    //        console.log(img.toString())
-    //        var image = img
-    //        console.log(image)
-
-    //                  .catch(err => res.status(err.status).json({
-    //                      message: err.message
-    //                  }).json({
-    //                      status: err.status
-
-    //            }));
+    
 
 
-
-    router.post('/registerUser', cors(),(req, res) => {
+    router.post('/registerUser', cors(), (req, res) => {
         console.log("UI", req.body);
 
         const companyname = req.body.companyname;
@@ -576,41 +448,30 @@ privateKey,encryptedfile// privateKey
         const email = req.body.email;
         console.log(email);
         const password = req.body.pass;
-        // console.log(password);
-        // const salt = await bcrypt.genSalt(17);
-        // req.body.pass = await bcrypt.hash(req.body.pass,salt);
-        // const password = req.body.pass;
+     
 
         console.log(password);
-            const pwd = crypto
+        const pwd = crypto
             .createHash('sha256')
             .update(password)
             .digest('base64');
-            console.log("pwd",pwd);//encryption
+        console.log("pwd", pwd); //encryption
         const retypepassword = req.body.repass;
         console.log(retypepassword);
-        // const salt = await bcrypt.genSalt(17);
-        // req.body.repass = await bcrypt.hash(req.body.repass,salt);
-        // const retypepassword = req.body.repass;
-        // console.log(retypepassword);
-            const rpwd = crypto
+       
+        const rpwd = crypto
             .createHash('sha256')
             .update(password)
             .digest('base64');
-            console.log("pwd",rpwd);//encryption
+        console.log("pwd", rpwd); //encryption
 
         const usertype = req.body.usertype;
         console.log("harini123..<<<", usertype);
         const phonenumber = req.body.phonenumber;
         console.log("phone", phonenumber);
-        // const privatekey = req.body.privatekey;
-        // console.log( "phone",privatekey);
-        // const url = req.body.url;
-        // console.log("url",url );
-       // const  gender = req.body.gender;
-       // console.log("gender", gender);
-        const accountaddress = req.body.accountaddress ;
-        console.log("accountaddress",accountaddress);
+       
+        const accountaddress = req.body.accountaddress;
+        console.log("accountaddress", accountaddress);
         var otp = "";
         var possible = "0123456789";
         for (var i = 0; i < 4; i++)
@@ -626,7 +487,7 @@ privateKey,encryptedfile// privateKey
 
         } else {
 
-            registerUser.registerUser(companyname, firstname, lastname, phonenumber, email, pwd, rpwd, usertype, encodedMail,otp,accountaddress)
+            registerUser.registerUser(companyname, firstname, lastname, phonenumber, email, pwd, rpwd, usertype, encodedMail, otp, accountaddress)
                 .then(result => {
                     var encodedMail = new Buffer(req.body.email).toString('base64');
                     var transporter = nodemailer.createTransport({
@@ -640,28 +501,28 @@ privateKey,encryptedfile// privateKey
                     });
                     var remoteHost = "119.81.59.59:8000"
                     var link = "http://" + remoteHost + "/email/verify?mail=" + encodedMail;
-                   console.log(link);
-                                       var otptosend = otp;
-                                       var mailOptions = {
-                                           transport: transporter,
-                                           from: "Aidant Service"+"<manoj.venkateswararaja@rapidqube.com>",
-                                           to: email,
-                                           subject: 'Aidant Service-OTP Confirmation',
-                   
-                                           html: "Hello,<br> Your Otp is.<br> " + otp
-                                       };
-                                       transporter.sendMail(mailOptions, (error, info) => {
-                                           if (error) {
-                                               console.log("Mail send error: ", error);
-                                           }
-                                       });
+                    console.log(link);
+                    var otptosend = otp;
+                    var mailOptions = {
+                        transport: transporter,
+                        from: "Aidant Service" + "<manoj.venkateswararaja@rapidqube.com>",
+                        to: email,
+                        subject: 'Aidant Service-OTP Confirmation',
 
-//  sendOtp.send(phonenumber, "AIDANT", otp, function(error, data, response) {
-//                         console.log(data);
-//                         console.log("response",response)
-//                          console.log(otp, "otp")
+                        html: "Hello,<br> Your Otp is.<br> " + otp
+                    };
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            console.log("Mail send error: ", error);
+                        }
+                    });
 
-//                       });
+                    //  sendOtp.send(phonenumber, "AIDANT", otp, function(error, data, response) {
+                    //                         console.log(data);
+                    //                         console.log("response",response)
+                    //                          console.log(otp, "otp")
+
+                    //                       });
 
 
                     var otptosend = 'your otp is ' + otp;
@@ -683,7 +544,7 @@ privateKey,encryptedfile// privateKey
                                     .json({
                                         message: result.message,
                                         phonenumber: phonenumber,
-                                
+
                                     });
 
                             })
@@ -701,14 +562,14 @@ privateKey,encryptedfile// privateKey
     });
 
     router.post('/mail', cors(), (req, res) => {
-            
-                      
-                            
+
+
+
         var email = req.body.email;
-        console.log("email",email);
+        console.log("email", email);
         var otp = req.body.otp;
-        console.log("otp",otp);
-    
+        console.log("otp", otp);
+
 
         if (!email || !otp) {
 
@@ -718,7 +579,7 @@ privateKey,encryptedfile// privateKey
                     message: 'Invalid Request !'
                 });
 
-        } else {  
+        } else {
             var encodedMail = new Buffer(req.body.email).toString('base64');
             var transporter = nodemailer.createTransport({
                 host: 'smtp.office365.com',
@@ -731,22 +592,22 @@ privateKey,encryptedfile// privateKey
             });
             var remoteHost = "119.81.59.59:8000"
             var link = "http://" + remoteHost + "/email/verify?mail=" + encodedMail;
-           console.log(link);
-                               var otptosend = otp;
-                               var mailOptions = {
-                                   transport: transporter,
-                                   from: '"Aidant Service"<manoj.venkateswararaja@rapidqube.com>',
-                                   to: email,
-                                   subject: 'OTP Confirmation',
-           
-                                   html: "Hello,<br> Your Otp is.<br> " + otp
-                               };
-                               transporter.sendMail(mailOptions, (error, info) => {
-                                   if (error) {
-                                       console.log("Mail send error: ", error);
-                                   }
-                               });
-           mail
+            console.log(link);
+            var otptosend = otp;
+            var mailOptions = {
+                transport: transporter,
+                from: '"Aidant Service"<manoj.venkateswararaja@rapidqube.com>',
+                to: email,
+                subject: 'OTP Confirmation',
+
+                html: "Hello,<br> Your Otp is.<br> " + otp
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log("Mail send error: ", error);
+                }
+            });
+            mail
                 .mail(email, otp)
                 .then(result => {
                     res
@@ -832,20 +693,20 @@ privateKey,encryptedfile// privateKey
                     pass: "Rpqb@123"
                 }
             });
-                               
-                                var mailOptions = {
-                                    transport: transporter,
-                                    from: 'manoj.venkateswararaja@rapidqube.com',
-                                    to: email,
-                                    subject: 'Document requirnment',
-            
-                                    html: "Chennai Super Kings"
-                                };
-                                transporter.sendMail(mailOptions, (error, info) => {
-                                    if (error) {}
-                                });
-          
-              
+
+            var mailOptions = {
+                transport: transporter,
+                from: 'manoj.venkateswararaja@rapidqube.com',
+                to: email,
+                subject: 'Document requirnment',
+
+                html: "Chennai Super Kings"
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {}
+            });
+
+
             mail
                 .mail(email, otp)
                 .then(result => {
@@ -864,7 +725,6 @@ privateKey,encryptedfile// privateKey
 
 
 
-
     router.post('/login', cors(), (req, res) => {
         console.log("entering login function in functions ");
         const emailid = req.body.email;
@@ -872,10 +732,10 @@ privateKey,encryptedfile// privateKey
         const passwordid = req.body.password;
         console.log(passwordid);
         const pwd = crypto
-        .createHash('sha256')
-        .update(passwordid)
-        .digest('base64');
-        console.log("pwd",pwd);//encryption
+            .createHash('sha256')
+            .update(passwordid)
+            .digest('base64');
+        console.log("pwd", pwd); //encryption
 
 
         login
@@ -892,10 +752,10 @@ privateKey,encryptedfile// privateKey
                     "message": "Login Successful",
                     "status": true,
                     "usertype": result.users.url,
-                    "status":result.users.status,
+                    "status": result.users.status,
                     "email": result.users.email,
-                    "result":result
-                    
+                    "result": result
+
                 });
             })
             .catch(err => res.status(err.status).json({
@@ -907,8 +767,8 @@ privateKey,encryptedfile// privateKey
     });
 
 
-   
-  
+
+
     router.post('/outbox', cors(), (req, res) => {
         console.log("entering outbox  functions ");
         const url = req.body.url;
@@ -925,7 +785,7 @@ privateKey,encryptedfile// privateKey
         console.log(status);
 
         outbox
-            .outboxUser(url, usertype,publicKey ,Key, venpublickey, status)
+            .outboxUser(url, usertype, publicKey, Key, venpublickey, status)
             .then(result => {
                 // console.log("resultharini", result);
 
@@ -946,16 +806,16 @@ privateKey,encryptedfile// privateKey
 
         console.log(req.body);
         var sndKey = req.body.sndKey;
-        console.log("publickey",sndKey);
+        console.log("publickey", sndKey);
         var privateKey = req.body.privateKey;
         console.log("publickey", privateKey);
         var IndexNumber = req.body.IndexNumber;
-        console.log("publickey",IndexNumber);
+        console.log("publickey", IndexNumber);
         var status = req.body.status;
         console.log("status", status);
 
         fetchkey
-            .fetchkey(sndKey,status)
+            .fetchkey(sndKey, status)
             .then(function(result) {
                 console.log(result)
 
@@ -1024,8 +884,8 @@ privateKey,encryptedfile// privateKey
 
         console.log(req.body);
         var usertype = req.body.usertype;
-        console.log("publickey",usertype);
-        
+        console.log("publickey", usertype);
+
 
         getkey
             .getkey(usertype)
@@ -1048,13 +908,13 @@ privateKey,encryptedfile// privateKey
 
         console.log(req.body);
         var status = req.body.status;
-        console.log("status",status);
+        console.log("status", status);
         var url = req.body.url;
-        console.log("url",url);
+        console.log("url", url);
         var email = req.body.email;
         console.log("email", email);
         geturl
-            .geturl(status,url,email)
+            .geturl(status, url, email)
             .then(function(result) {
                 console.log(result)
 
@@ -1070,10 +930,10 @@ privateKey,encryptedfile// privateKey
 
     });
 
-   //router.get('/companyid',cors(),async(req,res) =>{
+    //router.get('/companyid',cors(),async(req,res) =>{
     //const companyid= await registerEthers.findOne({ email:req.body.email})
-//     .select('usertype');
-//     res.send(companyid)
+    //     .select('usertype');
+    //     res.send(companyid)
 
-// });
- }
+    // });
+}
